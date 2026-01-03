@@ -65,6 +65,10 @@ async function seed() {
               {
                 type: 'paragraph',
                 children: [{ text: 'Welcome! Add your visitor guide content here.' }],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
               },
             ],
             direction: 'ltr',
@@ -105,6 +109,10 @@ async function seed() {
               {
                 type: 'paragraph',
                 children: [{ text: 'Learn about The 500 property and its history.' }],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
               },
             ],
             direction: 'ltr',
