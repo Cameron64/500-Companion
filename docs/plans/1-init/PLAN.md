@@ -745,15 +745,34 @@ module.exports = {
 
 ## Deployment Architecture
 
+### Development Environments Overview
+
+| Environment | Purpose | Database | URL |
+|-------------|---------|----------|-----|
+| **Localhost** | Active development, debugging | Docker Postgres (local) | `http://localhost:3000` |
+| **Railway Dev** | Integration testing, stakeholder preview | Railway Postgres (dev) | `https://dev.the500companion.com` |
+| **Railway Prod** | Live public site | Railway Postgres (prod) | `https://the500companion.com` |
+
+**Localhost Development**:
+- Full local stack via Docker Compose
+- Hot reload, fast iteration
+- No external dependencies
+- Use for feature development and debugging
+
+**Railway Dev Environment**:
+- Mirror of production architecture
+- Used for testing deployments, migrations
+- Share preview links with stakeholders
+- Auto-deploys from `dev` branch
+
 ### Railway Setup
 
 **Project Structure**:
 ```
 Railway Project: 500-companion
 ├── Service: web (Next.js app)
-│   ├── Environment: local (for testing Railway setup)
-│   ├── Environment: dev
-│   └── Environment: production
+│   ├── Environment: dev (auto-deploys from dev branch)
+│   └── Environment: production (auto-deploys from main branch)
 ├── Plugin: PostgreSQL
 │   ├── Database: dev
 │   └── Database: production
@@ -788,23 +807,45 @@ SMTP_USER=
 SMTP_PASS=
 ```
 
-**Dev/Production** (Railway):
+**Railway Dev** (`.env` in Railway dev environment):
 ```bash
-# Database (Railway provides this)
+# Database (Railway provides this automatically)
 DATABASE_URL=${{Postgres.DATABASE_URL}}
 
 # Payload
-PAYLOAD_SECRET=${{secrets.PAYLOAD_SECRET}} # Generate unique per env
-PAYLOAD_PUBLIC_SERVER_URL=${{RAILWAY_PUBLIC_DOMAIN}}
+PAYLOAD_SECRET=${{secrets.PAYLOAD_SECRET_DEV}} # Generate unique for dev
+PAYLOAD_PUBLIC_SERVER_URL=https://dev.the500companion.com
 
 # Next.js
-NEXT_PUBLIC_APP_URL=https://${{RAILWAY_PUBLIC_DOMAIN}}
+NEXT_PUBLIC_APP_URL=https://dev.the500companion.com
+NODE_ENV=production  # Use production mode even for dev environment
+
+# Storage (Railway Volumes for MVP, R2 for V1+)
+STORAGE_TYPE=local
+MEDIA_DIR=/data/media
+
+# Email (optional for dev)
+SMTP_HOST=
+SMTP_PORT=
+```
+
+**Railway Production** (`.env` in Railway production environment):
+```bash
+# Database (Railway provides this automatically)
+DATABASE_URL=${{Postgres.DATABASE_URL}}
+
+# Payload
+PAYLOAD_SECRET=${{secrets.PAYLOAD_SECRET_PROD}} # Generate unique for prod
+PAYLOAD_PUBLIC_SERVER_URL=https://the500companion.com
+
+# Next.js
+NEXT_PUBLIC_APP_URL=https://the500companion.com
 NODE_ENV=production
 
-# Storage (R2)
+# Storage (R2 for V1+)
 STORAGE_TYPE=s3
 S3_ENDPOINT=https://your-account.r2.cloudflarestorage.com
-S3_BUCKET=500-companion-media-dev # or -prod
+S3_BUCKET=500-companion-media-prod
 S3_ACCESS_KEY_ID=${{secrets.R2_ACCESS_KEY}}
 S3_SECRET_ACCESS_KEY=${{secrets.R2_SECRET_KEY}}
 S3_REGION=auto
@@ -815,7 +856,7 @@ SMTP_PORT=587
 SMTP_USER=apikey
 SMTP_PASS=${{secrets.SENDGRID_API_KEY}}
 
-# Monitoring (optional)
+# Monitoring
 SENTRY_DSN=${{secrets.SENTRY_DSN}}
 ```
 
@@ -854,24 +895,45 @@ name = "web"
 
 ### Deployment Flow
 
-1. **Local Development**:
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   LOCALHOST     │ ──► │   RAILWAY DEV   │ ──► │  RAILWAY PROD   │
+│  (development)  │     │   (testing)     │     │    (live)       │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+   docker-compose          git push dev           git push main
+   npm run dev             auto-deploy            auto-deploy
+```
+
+1. **Localhost Development**:
    ```bash
    docker-compose up -d  # Start local Postgres
-   npm run dev           # Start Next.js + Payload
+   npm run dev           # Start Next.js + Payload at localhost:3000
    ```
+   - Make changes, test locally
+   - Use for active development and debugging
+   - Database: local Docker Postgres (data persists in volume)
 
-2. **Push to Dev**:
+2. **Deploy to Railway Dev**:
    ```bash
+   git checkout dev
+   git merge feature-branch  # or commit directly
    git push origin dev
-   # Railway auto-deploys dev environment
+   # Railway auto-deploys to dev environment
    ```
+   - Test with production-like environment
+   - Verify migrations work
+   - Share preview link: `https://dev.the500companion.com`
+   - Test with real Railway Postgres
 
 3. **Promote to Production**:
    ```bash
+   git checkout main
+   git merge dev
    git push origin main
    # Railway auto-deploys production
-   # OR use Railway CLI: railway up --environment production
    ```
+   - Live at: `https://the500companion.com`
+   - Alternative: `railway up --environment production`
 
 ### Custom Domain Setup
 - Dev: `dev.the500companion.com` (Railway auto-SSL)
