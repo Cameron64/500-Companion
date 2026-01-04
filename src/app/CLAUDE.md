@@ -39,9 +39,18 @@ Payload CMS admin interface.
 
 | Route | Method | Purpose |
 |-------|--------|---------|
+| `/api/health` | GET | Health check endpoint (used by Railway) |
 | `/api/events/feed` | GET | FullCalendar event feed (JSON) |
 | `/api/[...slug]` | * | Payload REST API |
 | `/api/graphql` | POST | Payload GraphQL API |
+
+#### Health Check (`api/health/route.ts`)
+Simple endpoint for Railway deployment healthchecks:
+```typescript
+export async function GET() {
+  return NextResponse.json({ status: 'ok', timestamp: new Date().toISOString() })
+}
+```
 
 ## Key Components
 

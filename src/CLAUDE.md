@@ -11,6 +11,7 @@ Main source code for The 500 Companion application.
 | `globals/` | Payload CMS global configurations (site settings) |
 | `components/` | React components for the public site |
 | `lib/` | Utilities, Payload client, helper functions |
+| `migrations/` | Payload database migrations (auto-generated) |
 
 ## Key Files
 
@@ -55,3 +56,36 @@ The project uses `@/` alias for imports from `src/`:
 import { getPayloadClient } from '@/lib/payload'
 import { Navigation } from '@/components/ui/Navigation'
 ```
+
+## Database Migrations
+
+Migrations are stored in `migrations/` and run automatically during Railway deployment.
+
+### Creating Migrations
+
+After changing any collection or global schema:
+
+```bash
+npx payload migrate:create   # Creates migration files
+```
+
+This generates:
+- `migrations/YYYYMMDD_HHMMSS.ts` - Migration code (up/down functions)
+- `migrations/YYYYMMDD_HHMMSS.json` - Schema snapshot
+- `migrations/index.ts` - Migration registry
+
+### Running Migrations
+
+```bash
+# Local development
+npx payload migrate
+
+# Production (Railway)
+# Runs automatically via preDeployCommand in railway.toml
+```
+
+### Important Notes
+
+- **Always commit migration files** - They must be in the repo for production
+- Use `npx payload migrate` (not `npm run payload migrate`) to avoid devDependency issues in production
+- Migrations run before the app starts on Railway (via `preDeployCommand`)
