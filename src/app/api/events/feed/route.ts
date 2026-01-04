@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPayloadClient } from '@/lib/payload'
+import type { Where } from 'payload'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
@@ -9,22 +10,15 @@ export async function GET(request: NextRequest) {
   try {
     const payload = await getPayloadClient()
 
-    const where: Record<string, unknown> = {
+    const where: Where = {
       status: { equals: 'published' },
       eventType: { in: ['public', 'friends-only'] },
     }
 
-    if (start) {
+    if (start || end) {
       where.startDate = {
-        ...(where.startDate as Record<string, unknown>),
-        greater_than_equal: start,
-      }
-    }
-
-    if (end) {
-      where.startDate = {
-        ...(where.startDate as Record<string, unknown>),
-        less_than_equal: end,
+        ...(start && { greater_than_equal: start }),
+        ...(end && { less_than_equal: end }),
       }
     }
 
