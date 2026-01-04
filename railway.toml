@@ -5,8 +5,8 @@ buildCommand = "npm run build"
 [deploy]
 preDeployCommand = "npx payload migrate"
 startCommand = "next start"
-healthcheckPath = "/"
-healthcheckTimeout = 100
+healthcheckPath = "/api/health"
+healthcheckTimeout = 300
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
 
