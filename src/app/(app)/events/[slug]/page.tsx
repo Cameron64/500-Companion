@@ -45,8 +45,8 @@ export default async function EventPage({ params }: EventPageProps) {
       </Link>
 
       <header className="mb-8">
-        <div className="flex items-start gap-4 mb-4">
-          <div className="bg-primary-50 text-primary-600 rounded-lg p-4 text-center min-w-[80px]">
+        <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 mb-4">
+          <div className="bg-primary-50 text-primary-600 rounded-lg p-4 text-center shrink-0 w-fit">
             <div className="text-sm font-medium uppercase">
               {startDate.toLocaleDateString('en-US', { month: 'short' })}
             </div>
@@ -134,7 +134,7 @@ export default async function EventPage({ params }: EventPageProps) {
       </div>
 
       {event.description && (
-        <div className="prose prose-lg max-w-none">
+        <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
           <h2 className="font-semibold text-xl mb-4">About This Event</h2>
           {/* RichText content would be rendered here */}
           <div

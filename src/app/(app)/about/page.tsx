@@ -15,8 +15,8 @@ export default async function AboutPage() {
   if (!page) {
     return (
       <div className="container mx-auto px-4 py-12 max-w-3xl">
-        <h1 className="font-serif text-4xl font-bold mb-8">About The 500</h1>
-        <div className="prose prose-lg max-w-none">
+        <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-8">About The 500</h1>
+        <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
           <p className="text-gray-600">
             Welcome to {settings?.siteName || 'The 500 Companion'}.
             This is your digital guide to The 500 property.
@@ -34,7 +34,7 @@ export default async function AboutPage() {
 
   return (
     <article className="container mx-auto px-4 py-12 max-w-3xl">
-      <h1 className="font-serif text-4xl font-bold mb-8">{page.title}</h1>
+      <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-8">{page.title}</h1>
 
       {page.featuredImage && typeof page.featuredImage === 'object' && (
         <div className="aspect-video relative rounded-lg overflow-hidden mb-8">
@@ -51,7 +51,7 @@ export default async function AboutPage() {
         <p className="text-xl text-gray-600 mb-8">{page.excerpt}</p>
       )}
 
-      <div className="prose prose-lg max-w-none">
+      <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
         {/* RichText content would be rendered here */}
         {page.content && (
           <div

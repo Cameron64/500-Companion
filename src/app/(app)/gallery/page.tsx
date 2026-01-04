@@ -14,7 +14,7 @@ export default async function GalleryPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="font-serif text-4xl font-bold mb-8">Photo Gallery</h1>
+      <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-8">Photo Gallery</h1>
 
       {albums.docs.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

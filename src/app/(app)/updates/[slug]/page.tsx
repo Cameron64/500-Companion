@@ -42,7 +42,7 @@ export default async function UpdatePage({ params }: UpdatePageProps) {
       </Link>
 
       <header className="mb-8">
-        <h1 className="font-serif text-4xl font-bold mb-4">{update.title}</h1>
+        <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-4">{update.title}</h1>
         {update.publishedAt && (
           <time className="text-gray-500">
             {new Date(update.publishedAt).toLocaleDateString('en-US', {
@@ -67,7 +67,7 @@ export default async function UpdatePage({ params }: UpdatePageProps) {
         </div>
       )}
 
-      <div className="prose prose-lg max-w-none">
+      <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
         {/* RichText content would be rendered here */}
         {update.content && (
           <div

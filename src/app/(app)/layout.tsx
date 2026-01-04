@@ -44,7 +44,7 @@ export default async function PublicLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${merriweather.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${merriweather.variable} font-sans antialiased overflow-x-hidden`}>
         <div className="min-h-screen flex flex-col">
           <Navigation siteName={settings?.siteName || 'The 500 Companion'} />
           <main className="flex-grow">{children}</main>

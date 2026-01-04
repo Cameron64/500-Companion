@@ -14,7 +14,7 @@ export default async function UpdatesPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="font-serif text-4xl font-bold mb-8">Updates</h1>
+      <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-8">Updates</h1>
 
       {updates.docs.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -78,7 +78,7 @@ export default async function UpdatesPage() {
             <Link
               key={page}
               href={`/updates?page=${page}`}
-              className={`px-4 py-2 rounded ${
+              className={`px-4 py-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded ${
                 page === updates.page
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'

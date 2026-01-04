@@ -44,7 +44,7 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
       </Link>
 
       <header className="mb-8">
-        <h1 className="font-serif text-4xl font-bold mb-2">{album.title}</h1>
+        <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-2">{album.title}</h1>
         <div className="flex items-center gap-4 text-gray-500">
           {album.date && (
             <time>

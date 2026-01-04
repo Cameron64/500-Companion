@@ -11,7 +11,7 @@ export const metadata = {
 export default function EventsPage() {
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="font-serif text-4xl font-bold mb-8">Events</h1>
+      <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-8">Events</h1>
       <Suspense fallback={<EventsCalendarSkeleton />}>
         <EventCalendar />
       </Suspense>

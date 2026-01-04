@@ -45,7 +45,7 @@ export default async function HomePage() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="font-serif text-3xl font-bold">Recent Updates</h2>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold">Recent Updates</h2>
             <Link
               href="/updates"
               className="text-primary-600 hover:text-primary-700 font-medium"
@@ -106,7 +106,7 @@ export default async function HomePage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="font-serif text-3xl font-bold">Upcoming Events</h2>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold">Upcoming Events</h2>
             <Link
               href="/events"
               className="text-primary-600 hover:text-primary-700 font-medium"
@@ -124,7 +124,7 @@ export default async function HomePage() {
                   className="block bg-white border rounded-lg p-4 hover:border-primary-300 transition-colors"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="bg-primary-50 text-primary-600 rounded-lg p-3 text-center min-w-[60px]">
+                    <div className="bg-primary-50 text-primary-600 rounded-lg p-3 text-center shrink-0">
                       <div className="text-sm font-medium uppercase">
                         {new Date(event.startDate).toLocaleDateString('en-US', {
                           month: 'short',
@@ -163,7 +163,7 @@ export default async function HomePage() {
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="font-serif text-3xl font-bold">Photo Gallery</h2>
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold">Photo Gallery</h2>
               <Link
                 href="/gallery"
                 className="text-primary-600 hover:text-primary-700 font-medium"

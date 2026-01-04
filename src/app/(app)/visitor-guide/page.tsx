@@ -14,8 +14,8 @@ export default async function VisitorGuidePage() {
   if (!page) {
     return (
       <div className="container mx-auto px-4 py-12 max-w-3xl">
-        <h1 className="font-serif text-4xl font-bold mb-8">Visitor Guide</h1>
-        <div className="prose prose-lg max-w-none">
+        <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-8">Visitor Guide</h1>
+        <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
           <p className="text-gray-600">
             The visitor guide is coming soon. Check back later for information about:
           </p>
@@ -36,11 +36,11 @@ export default async function VisitorGuidePage() {
 
   return (
     <article className="container mx-auto px-4 py-12 max-w-3xl">
-      <h1 className="font-serif text-4xl font-bold mb-8">{page.title}</h1>
+      <h1 className="font-serif text-3xl sm:text-4xl font-bold mb-8">{page.title}</h1>
       {page.excerpt && (
         <p className="text-xl text-gray-600 mb-8">{page.excerpt}</p>
       )}
-      <div className="prose prose-lg max-w-none">
+      <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
         {/* RichText content would be rendered here */}
         {page.content && (
           <div

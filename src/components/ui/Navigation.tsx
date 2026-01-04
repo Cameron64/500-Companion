@@ -49,7 +49,7 @@ export function Navigation({ siteName = 'The 500 Companion' }: NavigationProps) 
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden p-2"
+            className="md:hidden p-3 text-gray-700"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
