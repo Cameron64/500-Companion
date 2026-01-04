@@ -13,5 +13,5 @@ restartPolicyMaxRetries = 3
 
 [[services]]
 name = "web"
-internalPort = 8080
+internalPort = 3000
 protocol = "TCP"
