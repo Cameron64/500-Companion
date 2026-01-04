@@ -1,4 +1,5 @@
 import { getPayload } from 'payload'
+import type { Where } from 'payload'
 import config from '@payload-config'
 
 export const getPayloadClient = async () => {
@@ -47,7 +48,7 @@ export async function getEvents(options?: {
   const payload = await getPayloadClient()
   const now = new Date().toISOString()
 
-  const where: Record<string, unknown> = {
+  const where: Where = {
     status: { equals: 'published' },
     eventType: { in: ['public', 'friends-only'] },
   }
@@ -56,17 +57,11 @@ export async function getEvents(options?: {
     where.startDate = { greater_than: now }
   }
 
-  if (options?.start) {
+  if (options?.start || options?.end) {
     where.startDate = {
-      ...where.startDate as Record<string, unknown>,
-      greater_than_equal: options.start
-    }
-  }
-
-  if (options?.end) {
-    where.startDate = {
-      ...where.startDate as Record<string, unknown>,
-      less_than_equal: options.end
+      ...(options?.upcoming && { greater_than: now }),
+      ...(options?.start && { greater_than_equal: options.start }),
+      ...(options?.end && { less_than_equal: options.end }),
     }
   }
 
