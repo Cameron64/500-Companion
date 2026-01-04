@@ -4,7 +4,7 @@ buildCommand = "npm run build"
 
 [deploy]
 preDeployCommand = "npx payload migrate"
-startCommand = "next start --hostname 0.0.0.0 --port ${PORT:-3000}"
+startCommand = "npm start"
 # Temporarily disable healthcheck for debugging
 # healthcheckPath = "/api/health"
 # healthcheckTimeout = 300
