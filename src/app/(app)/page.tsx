@@ -2,6 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getSiteSettings, getUpdates, getEvents, getAlbums } from '@/lib/payload'
 
+// Prevent static generation - needs database at runtime
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   const settings = await getSiteSettings()
   const updates = await getUpdates({ limit: 3 })

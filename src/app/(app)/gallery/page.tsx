@@ -2,6 +2,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAlbums } from '@/lib/payload'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Gallery | The 500 Companion',
   description: 'Photo gallery from The 500',

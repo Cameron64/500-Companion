@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import { getPage, getSiteSettings } from '@/lib/payload'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'About | The 500 Companion',
   description: 'Learn about The 500 property',

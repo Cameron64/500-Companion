@@ -1,5 +1,7 @@
 import { getPage } from '@/lib/payload'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Visitor Guide | The 500 Companion',
   description: 'Everything you need to know for visiting The 500',
