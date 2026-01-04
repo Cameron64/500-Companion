@@ -5,9 +5,8 @@ buildCommand = "npm run build"
 [deploy]
 preDeployCommand = "npx payload migrate"
 startCommand = "npm start"
-# Temporarily disable healthcheck for debugging
-# healthcheckPath = "/api/health"
-# healthcheckTimeout = 300
+healthcheckPath = "/api/health"
+healthcheckTimeout = 120
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
 
