@@ -4,7 +4,7 @@ buildCommand = "npm run build"
 
 [deploy]
 preDeployCommand = "npx payload migrate"
-startCommand = "node .next/standalone/server.js"
+startCommand = "next start"
 healthcheckPath = "/api/health"
 healthcheckTimeout = 300
 restartPolicyType = "on_failure"
