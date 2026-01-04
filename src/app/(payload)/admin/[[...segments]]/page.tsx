@@ -21,7 +21,7 @@ export const generateViewport = (): Viewport => ({
 export const generateMetadata = async ({ params, searchParams }: Args): Promise<Metadata> => {
   const metadata = await generatePageMetadata({ config, params, searchParams })
   // Remove themeColor from metadata as it's now in viewport
-  const { themeColor, ...rest } = metadata as Metadata & { themeColor?: string }
+  const { themeColor: _themeColor, ...rest } = metadata as Metadata & { themeColor?: string }
   return rest
 }
 

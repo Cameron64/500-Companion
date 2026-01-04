@@ -21,7 +21,7 @@ export const Users: CollectionConfig = {
       return req.user.role === 'admin'
     },
     read: ({ req }) => !!req.user,
-    update: ({ req }) => req.user?.role === 'admin' || req.user?.id === req.params?.id,
+    update: ({ req, id }) => req.user?.role === 'admin' || req.user?.id === id,
     delete: ({ req }) => req.user?.role === 'admin',
   },
   fields: [
