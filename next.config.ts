@@ -22,7 +22,6 @@ const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: false,
   },
-  serverExternalPackages: ['payload', '@payloadcms/db-postgres', '@payloadcms/next'],
   sassOptions: {
     includePaths: [path.join(__dirname, 'node_modules')],
     silenceDeprecations: ['legacy-js-api', 'import'],
