@@ -7,11 +7,9 @@
   --background: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground: #ededed;
-    --background: #0a0a0a;
-  }
+.dark {
+  --foreground: #ededed;
+  --background: #111827;
 }
 
 body {
@@ -48,4 +46,65 @@ body {
 
 .fc-day-today {
   background-color: rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Dark mode calendar styles */
+.dark .fc {
+  --fc-border-color: #374151;
+  --fc-button-bg-color: #374151;
+  --fc-button-border-color: #4b5563;
+  --fc-button-hover-bg-color: #4b5563;
+  --fc-button-hover-border-color: #6b7280;
+  --fc-button-active-bg-color: #10b981;
+  --fc-button-active-border-color: #059669;
+  --fc-page-bg-color: #1f2937;
+  --fc-neutral-bg-color: #374151;
+  --fc-list-event-hover-bg-color: #374151;
+  --fc-today-bg-color: rgba(16, 185, 129, 0.15);
+}
+
+.dark .fc-theme-standard td,
+.dark .fc-theme-standard th {
+  border-color: #374151;
+}
+
+.dark .fc-col-header-cell-cushion,
+.dark .fc-daygrid-day-number,
+.dark .fc-list-day-text,
+.dark .fc-list-day-side-text {
+  color: #e5e7eb;
+}
+
+.dark .fc-list-event-title a {
+  color: #e5e7eb;
+}
+
+.dark .fc-list-empty {
+  background-color: #1f2937;
+}
+
+/* Mobile calendar toolbar fixes */
+@media (max-width: 640px) {
+  .fc .fc-toolbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .fc .fc-toolbar-chunk {
+    display: flex;
+    justify-content: center;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 1.125rem;
+  }
+
+  .fc .fc-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .fc .fc-button-group > .fc-button {
+    padding: 0.25rem 0.5rem;
+  }
 }

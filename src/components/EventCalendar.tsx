@@ -23,12 +23,12 @@ export function EventCalendar() {
   // Don't render calendar until we know the viewport size
   if (!viewportChecked) {
     return (
-      <div className="bg-white rounded-lg shadow-sm p-4 md:p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 md:p-6">
         <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 rounded w-1/3 mb-6" />
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-6" />
           <div className="grid grid-cols-7 gap-2">
             {Array.from({ length: 35 }).map((_, i) => (
-              <div key={i} className="aspect-square bg-gray-100 rounded" />
+              <div key={i} className="aspect-square bg-gray-100 dark:bg-gray-700 rounded" />
             ))}
           </div>
         </div>
@@ -37,7 +37,7 @@ export function EventCalendar() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4 md:p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 md:p-6">
       <FullCalendar
         plugins={[dayGridPlugin, listPlugin, interactionPlugin]}
         initialView={isMobile ? 'listWeek' : 'dayGridMonth'}

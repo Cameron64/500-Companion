@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { DarkModeToggle } from './DarkModeToggle'
 
 interface NavItem {
   label: string
@@ -25,7 +26,7 @@ export function Navigation({ siteName = 'The 500 Companion' }: NavigationProps) 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-50">
       <nav className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -39,17 +40,20 @@ export function Navigation({ siteName = 'The 500 Companion' }: NavigationProps) 
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-600 hover:text-primary-600 transition-colors"
+                className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
               >
                 {item.label}
               </Link>
             ))}
+            <DarkModeToggle />
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            className="md:hidden p-3 text-gray-700"
+          {/* Mobile Menu Button and Dark Mode Toggle */}
+          <div className="md:hidden flex items-center">
+            <DarkModeToggle />
+            <button
+              type="button"
+              className="p-3 text-gray-700 dark:text-gray-300"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -75,18 +79,19 @@ export function Navigation({ siteName = 'The 500 Companion' }: NavigationProps) 
                 />
               )}
             </svg>
-          </button>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t">
+          <div className="md:hidden py-4 border-t dark:border-gray-700">
             <div className="flex flex-col space-y-3">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-gray-600 hover:text-primary-600 transition-colors py-2"
+                  className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}

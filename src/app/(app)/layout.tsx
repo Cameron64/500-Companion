@@ -42,8 +42,21 @@ export default async function PublicLayout({
 }) {
   const settings = await getSiteSettings()
 
+  // Script to set dark mode before hydration to prevent flash
+  // Only uses localStorage - ignores system preference for manual control
+  const darkModeScript = `
+    (function() {
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  `
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: darkModeScript }} />
+      </head>
       <body className={`${inter.variable} ${merriweather.variable} font-sans antialiased overflow-x-hidden`}>
         <div className="min-h-screen flex flex-col">
           <Navigation siteName={settings?.siteName || 'The 500 Companion'} />
