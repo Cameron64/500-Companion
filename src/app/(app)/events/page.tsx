@@ -1,6 +1,8 @@
 import { Suspense } from 'react'
 import { EventCalendar } from '@/components/EventCalendar'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Events | The 500 Companion',
   description: 'Upcoming events at The 500',
